@@ -1,0 +1,15 @@
+Source: ubiquity-desktop-layout
+Section: admin
+Priority: optional
+Maintainer: LliureX Team <lliurex@gva.es>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.1.2
+Homepage: http://lliurex.net
+#Vcs-Git: https://anonscm.debian.org/git/collab-maint/ubiquity-desktop-layout.git
+#Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/ubiquity-desktop-layout.git
+
+Package: ubiquity-desktop-layout
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Add step to select desktop layout
+ Ubiquity plugin to select between classic layout or default layout
