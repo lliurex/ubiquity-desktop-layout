@@ -18,7 +18,8 @@ class PageKde(plugin.PluginUI):
     plugin_title = 'lliurex/securityUpgrades'
 
     def __init__(self, controller, *args, **kwargs):
-        with open('/tmp/ubilliurexlayout','w') as fd:
+        os.system('mkdir -p /run/user/999/ubiquity')
+        with open('/run/user/999/ubiquity/ubilliurexlayout','w') as fd:
             fd.write('default')
         from PyQt5.QtGui import QPixmap, QIcon, QFont
         from PyQt5.QtWidgets import QWidget, QFrame, QVBoxLayout, QScrollArea, QGridLayout, QHBoxLayout, QLabel, QSizePolicy, QRadioButton
@@ -174,7 +175,7 @@ class PageKde(plugin.PluginUI):
         return layout
     
     def modify_value(self, layout):
-        with open('/tmp/ubilliurexlayout','w') as fd:
+        with open('/run/user/999/ubiquity/ubilliurexlayout','w') as fd:
             fd.write(layout)
 
 
@@ -182,7 +183,7 @@ class Install(plugin.InstallPlugin):
     
     def install(self, target, progress, *args, **kwargs):
         layout = 'default'
-        with open('/tmp/ubilliurexlayout') as fd:
+        with open('/run/user/999/ubiquity/ubilliurexlayout') as fd:
             layout = fd.readline().strip()
         os.system('chroot {target} /usr/bin/llx-desktop-layout set {layout}'.format(target=target,layout=layout))
 
