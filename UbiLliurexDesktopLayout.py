@@ -9,7 +9,8 @@ import gettext
 NAME = 'lliurexDesktopLayout'
 AFTER = 'console_setup'
 BEFORE = 'usersetup'
-WEIGHT = 12
+WEIGHT = 40
+
 
 gettext.textdomain('ubilliurexdesktoplayout')
 _ = gettext.gettext
@@ -17,13 +18,12 @@ _ = gettext.gettext
 class PageKde(plugin.PluginUI):
     plugin_title = 'lliurex/securityUpgrades'
 
+    
     def __init__(self, controller, *args, **kwargs):
-        os.system('mkdir -p /run/user/999/ubiquity')
-        with open('/run/user/999/ubiquity/ubilliurexlayout','w') as fd:
-            fd.write('default')
         from PyQt5.QtGui import QPixmap, QIcon, QFont
         from PyQt5.QtWidgets import QWidget, QFrame, QVBoxLayout, QScrollArea, QGridLayout, QHBoxLayout, QLabel, QSizePolicy, QRadioButton
         from PyQt5.QtCore import Qt
+        self.modify_value("default")
         self.controller = controller
         self.translations = {"defaultlayout":"Default layout", "defaultlayoutdescription": "LliureX show two bars", "classiclayout" : "Classic layout","classiclayoutdescription" : "LliureX show one bar"}
         self.main_widget = QFrame()
@@ -42,6 +42,11 @@ class PageKde(plugin.PluginUI):
 
         self.page = widget
         self.plugin_widgets = self.page
+
+    @misc.raise_privileges
+    def create_layout_file(self):
+        with open('/var/lib/ubiquity/ubilliurexlayout','w') as fd:
+            fd.write('default')
 
     def createDefaultLayout(self,last):
         from PyQt5.QtWidgets import QGridLayout, QHBoxLayout, QVBoxLayout
@@ -173,9 +178,12 @@ class PageKde(plugin.PluginUI):
         layout.addWidget(line)
         layout.setContentsMargins(20,5,0,0)
         return layout
-    
+
+    @misc.raise_privileges
     def modify_value(self, layout):
-        with open('/run/user/999/ubiquity/ubilliurexlayout','w') as fd:
+        if not os.path.exists('/var/lib/ubiquity'):
+            os.makedirs('/var/lib/ubiquity')
+        with open('/var/lib/ubiquity/ubilliurexlayout','w') as fd:
             fd.write(layout)
 
 
@@ -183,7 +191,7 @@ class Install(plugin.InstallPlugin):
     
     def install(self, target, progress, *args, **kwargs):
         layout = 'default'
-        with open('/run/user/999/ubiquity/ubilliurexlayout') as fd:
+        with open('/var/lib/ubiquity/ubilliurexlayout') as fd:
             layout = fd.readline().strip()
         os.system('chroot {target} /usr/bin/llx-desktop-layout set {layout}'.format(target=target,layout=layout))
 
