@@ -16,7 +16,7 @@ gettext.textdomain('ubilliurexdesktoplayout')
 _ = gettext.gettext
 
 class PageKde(plugin.PluginUI):
-    plugin_title = 'lliurex/securityUpgrades'
+    plugin_breadcrumb = 'ubiquity/text/breadcrumb_desktopLayout'
 
     
     def __init__(self, controller, *args, **kwargs):
