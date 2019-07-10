@@ -16,8 +16,9 @@ gettext.textdomain('ubilliurexdesktoplayout')
 _ = gettext.gettext
 
 class PageKde(plugin.PluginUI):
-    plugin_breadcrumb = 'lliurex/breadcrumb_desktopLayout'
-
+    plugin_title = 'lliurex/text/breadcrumb_desktopLayout'
+    plugin_breadcrumb = 'lliurex/text/breadcrumb_desktopLayout'
+    plugin_prefix = 'lliurex/text'
     
     def __init__(self, controller, *args, **kwargs):
         from PyQt5.QtGui import QPixmap, QIcon, QFont
