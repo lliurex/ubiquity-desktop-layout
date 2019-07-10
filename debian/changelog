@@ -1,3 +1,9 @@
+ubiquity-desktop-layout (0.3.1) bionic; urgency=medium
+
+  * Add po-debconf build-depend
+
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Wed, 10 Jul 2019 12:57:22 +0200
+
 ubiquity-desktop-layout (0.3) bionic; urgency=medium
 
   * Add translations
