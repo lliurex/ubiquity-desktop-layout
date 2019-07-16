@@ -44,6 +44,13 @@ class PageKde(plugin.PluginUI):
         self.page = widget
         self.plugin_widgets = self.page
 
+    def get_translations(self):
+        _("Default layout")
+        _("LliureX show two bars")
+        _("Classic layout")
+        _("LliureX show one bar")
+
+
     @misc.raise_privileges
     def create_layout_file(self):
         with open('/var/lib/ubiquity/ubilliurexlayout','w') as fd:
@@ -187,6 +194,13 @@ class PageKde(plugin.PluginUI):
         with open('/var/lib/ubiquity/ubilliurexlayout','w') as fd:
             fd.write(layout)
 
+    def plugin_translate(self, lang):
+        langtoinstall = gettext.translation('ubilliurexdesktoplayout',languages=[lang])
+        langtoinstall.install()
+        self.default_name.setText(_(self.translations['defaultlayout']))
+        self.default_description.setText(_(self.translations['defaultlayoutdescription']))
+        self.classic_name.setText(_(self.translations['classiclayout']))
+        self.classic_description.setText(_(self.translations['classiclayoutdescription']))
 
 class Install(plugin.InstallPlugin):
     
