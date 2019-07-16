@@ -15,7 +15,7 @@
 
 
 %:
-	dh $@
+	dh $@ --with i18n
 
 
 # dh_make generated override targets
