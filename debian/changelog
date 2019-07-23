@@ -1,3 +1,9 @@
+ubiquity-desktop-layout (0.4.1) bionic; urgency=medium
+
+  * Update valencian translations
+
+ -- Raul Rodrigo Segura <raurodse@gmail.com>  Tue, 23 Jul 2019 19:59:28 +0200
+
 ubiquity-desktop-layout (0.4) bionic; urgency=medium
 
   * Add translations
